@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ResultController {
     private final Output output;
-    @Autowired
     private OutputDBRepository repository;
 
     public ResultController(Output output) {
@@ -21,10 +20,8 @@ public class ResultController {
     @PostMapping("/index")
     public String publishResult(@RequestParam int year, @RequestParam int month, @RequestParam int day, Model model) {
         Input input = new Input(day, month, year);
-        var result = output.result(input);
+        String result = output.result(input);
         model.addAttribute("result", result);
-        OutputDb db = new OutputDb(result);
-        repository.save(db);
         return "/result";
     }
 }

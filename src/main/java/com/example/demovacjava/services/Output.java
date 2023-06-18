@@ -1,14 +1,24 @@
 package com.example.demovacjava.services;
 
 import com.example.demovacjava.models.Input;
+import com.example.demovacjava.models.OutputDb;
+import com.example.demovacjava.repositories.OutputDBRepository;
 import com.example.demovacjava.vaccinaresult.VaccineResultFactory;
 import com.example.demovacjava.vaccinaresult.VaccineResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.time.LocalDate;
 import java.time.Period;
 @Service
+@Transactional
 public class Output {
+    private OutputDBRepository repository;
+    public Output(OutputDBRepository repository) {
+        this.repository = repository;
+    }
     private Input input;
     public String result(Input input) {
         LocalDate today = LocalDate.now();
@@ -19,4 +29,13 @@ public class Output {
         VaccineResultFactory factory = new VaccineResultFactory();
         return factory.createResult(y, m).getMessage();
     }
+
+    @Transactional
+    public void addDb(String res, Input input){
+        OutputDb output = new OutputDb(result(input));
+        repository.save(output);
+    }
+
+
+
 }
