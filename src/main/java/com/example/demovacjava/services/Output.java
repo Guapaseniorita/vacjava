@@ -29,12 +29,12 @@ public class Output {
         VaccineResultFactory factory = new VaccineResultFactory();
         return factory.createResult(y, m).getMessage();
     }
-
     @Transactional
-    public void addDb(String res, Input input){
-        OutputDb output = new OutputDb(result(input));
+    public void addDb(String res){
+        OutputDb output = new OutputDb(res);
         repository.save(output);
     }
+
 
 
 
