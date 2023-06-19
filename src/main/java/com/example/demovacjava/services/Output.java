@@ -13,12 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.Period;
 @Service
-@Transactional
 public class Output {
-    private OutputDBRepository repository;
-    public Output(OutputDBRepository repository) {
-        this.repository = repository;
-    }
+//    private OutputDBRepository repository;
+//    public Output(OutputDBRepository repository) {
+//        this.repository = repository;
+//    }
     private Input input;
     public String result(Input input) {
         LocalDate today = LocalDate.now();
@@ -29,11 +28,10 @@ public class Output {
         VaccineResultFactory factory = new VaccineResultFactory();
         return factory.createResult(y, m).getMessage();
     }
-    @Transactional
-    public void addDb(String res){
-        OutputDb output = new OutputDb(res);
-        repository.save(output);
-    }
+//    public void addDb(String res){
+//        OutputDb output = new OutputDb(res);
+//        repository.save(output);
+//    }
 
 
 

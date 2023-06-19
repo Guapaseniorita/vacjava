@@ -7,7 +7,7 @@ public class OutputDb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column
+    @Column(length = 65000)
     private String result;
     public OutputDb(String result) {
         this.result = result;
